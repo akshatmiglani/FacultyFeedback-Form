@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ok.css' %}">   
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 id="title" class="text-center">FEEDBACK FORM</h1>
+        <p id="description" class="description text-center">
+          Thank you for taking the time!
+        </p>
+      </header>
+
+        <div class="thanks">
+            <p> Thank you for submitting the feedback.</p>
+            <p>Click below to submit another!</p>
+        </div>  
+        <div class="form-group">
+          <button type="submit" id="submit" class="submit-button">
+            <a href="../proj">Submit Another Feedback</a>
+          </button>
+        </div>
+    
+    </div>
+   
+  </body>
+</html>

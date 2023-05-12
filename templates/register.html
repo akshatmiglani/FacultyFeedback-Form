@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trialcss.css' %}">   
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 id="title" class="text-center">FEEDBACK FORM</h1>
+        <p id="description" class="description text-center">
+          Thank you for taking the time to better our education system
+        </p>
+      </header>
+      <form id="survey-form" method="POST" action="../insertuser/"> {% csrf_token %}
+        <div class="form-group">
+          <label id="name-label">Enter Rollno</label>
+          <input
+          type="text"
+          name="rno"
+          id="rno"
+          class="form-control"
+          placeholder="Example.21BCP055"
+          required
+        />
+      </div>
+        <div class="form-group">
+          <label id="name-label" for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label id="email-label" for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="form-control"
+            placeholder="Enter your Email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label id="number-label" for="number">Age<span class="clue">(optional)</span></label
+          >
+          <input
+            type="number"
+            name="age"
+            id="number"
+            min="18"
+            max="99"
+            class="form-control"
+            placeholder="Age"
+          />
+        </div>
+        <div class="form-group">
+          <label>Select Department</label>
+          <select id="s1" name="deptID" required class="form-control" onchange="populate(this.id,'s2')">
+            <option value="" hidden>Select Department</option>
+            <option disabled ></option>
+            <option>CSE</option>
+            <option>ICT</option>
+            <option>ECE</option>
+            <option>MECH</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Select Course </label>
+          <select id="s2" name="Course" required class="form-control" onchange="populate1(this.id,'fac')">
+            <option value="" hidden>Select Department</option>
+            
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Select faculty </label>
+          <select id="fac" name="Facultyname" required class="form-control">
+            <option value="" hidden>Select Faculty</option>
+            <option disabled ></option>
+            
+          </select>
+        </div>  
+        
+        <div class="form-group">
+          <br>
+          <label>For the following questions, keep in mind the grading scale:</label>
+          <br>
+          <label> 0:Can Improve 1:Disagree  2:Neutral 3: Agree 4:Strongly Agree </label>
+          <br>
+          <labeL>1.The faculty explained the concepts clearly</labeL>
+          <select name="q1" required class="form-control" >
+            <option value="" hidden>Select</option>
+            <option disabled ></option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+
+          </select>
+        </div>
+        
+        <div class="form-group">
+         
+          <label>2.I recieved useful feedback on my performance on tests,assignments,etc ..</label>
+          <select name="q2" required class="form-control" >
+            <option value="" hidden>Select</option>
+            <option disabled ></option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+         
+          <label>3.Instructional materials(books,handouts,manuals) provied by faculty increased my knowledge and skills in the subject matter. </label>
+          <select name="q3" required class="form-control" >
+            <option value="" hidden>Select</option>
+            <option disabled ></option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+         
+          <label>4. My faculty used class time effectively .</label>
+          <select name="q4" required class="form-control" >
+            <option value="" hidden>Select</option>
+            <option disabled ></option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label>5. I feel comfortable speaking with the faculty .</label>
+          <select name="q5" required class="form-control" >
+            <option value="" hidden>Select</option>
+            <option disabled ></option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <p>Any improvments or remarks for the faculty:</p>
+          <textarea required
+            id="comments"
+            class="input-textarea"
+            name="comment"
+            placeholder="Enter your comment here..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" id="submit" class="submit-button">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <script>
+      function populate(s1,s2){
+        var s1= document.getElementById(s1);
+
+        var s2= document.getElementById(s2);
+        s2.innerHTML="";
+        if(s1.value=="CSE"){
+          var optionArr=["|","C101|C101","C102|C102","C103|C103"];
+        }else if(s1.value=="ICT") {
+
+          var optionArr=["|","C201|C201","C202|C202","C203|C203"];
+        }
+        else if(s1.value=="ECE") {
+
+          var optionArr=["|","C301|C301","C302|C302","C303|C303"];
+        }
+        else if(s1.value=="MECH") {
+
+          var optionArr=["|","C401|C401","C402|C402","C403|C403"];
+        }
+        for(var option in optionArr){
+          var pair=optionArr[option].split("|");
+          var newoption= document.createElement("option");
+          newoption.value=pair[0];
+          newoption.innerHTML=pair[1];
+          s2.options.add(newoption);
+        }
+      }
+      function populate1(s1,s2){
+
+        var s1= document.getElementById(s1);
+
+        var s2= document.getElementById(s2);
+        s2.innerHTML="";
+        if(s1.value=="C101"){
+          var optionArr=["|","F101|F101","F102|F102"];
+        }else if(s1.value=="C102") {
+
+          var optionArr=["|","F103|F103","F104|F104"];
+        }
+        else if(s1.value=="C103") {
+
+          var optionArr=["|","F105|F105","F106|F106"];
+        }
+        else if(s1.value=="C201") {
+
+          var optionArr=["|","F201|F201","F202|F202"];
+        }
+        else if(s1.value=="C202") {
+
+          var optionArr=["|","F203|F203","F204|F204"];
+        }
+
+        else if(s1.value=="C203") {
+
+          var optionArr=["|","F205|F205","F206|F206"];
+        } 
+
+        else if(s1.value=="C301") {
+
+          var optionArr=["|","F301|F301","F302|F302"];
+}
+else if(s1.value=="C302") {
+
+  var optionArr=["|","F303|F303","F304|F304"];
+        }
+else if(s1.value=="C303") {
+  var optionArr=["|","F305|F305","F306|F306"];
+}
+else if(s1.value=="C401") {
+
+
+  var optionArr=["|","F401|F401","F402|F402"];
+}
+else if(s1.value=="C402") {
+
+
+  var optionArr=["|","F403|F403","F404|F404"];
+}
+else if(s1.value=="C403") {
+
+
+  var optionArr=["|","F405|F405","F406|F406"];
+}
+
+        for(var option in optionArr){
+          var pair=optionArr[option].split("|");
+          var newoption= document.createElement("option");
+          newoption.value=pair[0];
+          newoption.innerHTML=pair[1];
+          s2.options.add(newoption);
+        }
+      }
+    </script>
+  </body>
+</html>
